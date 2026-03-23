@@ -37,9 +37,15 @@
         top: 0;
         height: 100vh;
         overflow: hidden;
+        isolation: isolate;
         background: var(--cm-left-bg);
         border: 1px solid rgba(255, 255, 255, 0.04);
         padding: clamp(1.2rem, 2.8vw, 2.2rem);
+      }
+
+      .curriculum-mission__left > * {
+        position: relative;
+        z-index: 1;
       }
 
       .curriculum-mission__left::before {
@@ -65,6 +71,7 @@
         color: rgba(245, 236, 223, 0.025);
         pointer-events: none;
         user-select: none;
+        z-index: 0;
       }
 
       .curriculum-mission__label {

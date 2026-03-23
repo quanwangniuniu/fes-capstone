@@ -10,6 +10,11 @@
         padding-block: clamp(2.8rem, 5vw, 5.5rem);
       }
 
+      .contract-closer .container {
+        position: relative;
+        z-index: 1;
+      }
+
       .contract-closer__watermark {
         position: absolute;
         right: -1rem;
@@ -21,6 +26,7 @@
         color: rgba(245, 238, 227, 0.04);
         pointer-events: none;
         user-select: none;
+        z-index: 0;
       }
 
       .contract-closer__headline {

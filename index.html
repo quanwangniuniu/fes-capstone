@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Frontend Simplified - The fastest way to learn frontend development and land a high-paying job. Join 40,000+ developers.">
   <title>Frontend Simplified | The BEST Place to Learn Frontend</title>
+  <script>
+    (() => {
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = prefersDark ? "dark" : "light";
+    })();
+  </script>
   <link rel="stylesheet" href="styles.css">
 
   <link rel="stylesheet" href="styles/sections/firstlight.css">
@@ -20,6 +26,7 @@
   <link rel="stylesheet" href="styles/sections/contract-closer.css">
   <link rel="stylesheet" href="styles/sections/faq-interrogation.css">
   <link rel="stylesheet" href="styles/sections/transmission-footer.css">
+  <link rel="stylesheet" href="styles/sections/theme-overrides.css">
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
@@ -35,7 +42,13 @@
         <a href="#" class="firstlight-nav__link">Account Login</a>
         <a href="#" class="firstlight-nav__link">Contact</a>
       </nav>
-      <a href="#join-waitlist" class="firstlight-nav__cta">Join Waitlist</a>
+      <div class="firstlight-nav__actions">
+        <button class="firstlight-nav__theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+          <span class="firstlight-nav__theme-toggle-icon" aria-hidden="true">◐</span>
+          <span class="firstlight-nav__theme-toggle-label">Dark</span>
+        </button>
+        <a href="#join-waitlist" class="firstlight-nav__cta">Join Waitlist</a>
+      </div>
     </div>
   </header>
 
@@ -988,6 +1001,25 @@
     </div>
   </footer>
   <script>
+    const root = document.documentElement;
+    const themeToggle = document.getElementById("theme-toggle");
+    const syncThemeToggle = () => {
+      if (!themeToggle) return;
+      const isDark = root.dataset.theme === "dark";
+      themeToggle.setAttribute("aria-pressed", String(isDark));
+      themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+      const label = themeToggle.querySelector(".firstlight-nav__theme-toggle-label");
+      if (label) label.textContent = isDark ? "Dark" : "Light";
+    };
+    syncThemeToggle();
+    if (themeToggle) {
+      themeToggle.addEventListener("click", () => {
+        root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+        root.classList.add("theme-ready");
+        syncThemeToggle();
+      });
+    }
+
     document.querySelectorAll('.faq-item').forEach((item) => {
       item.querySelector('.faq-question').addEventListener('click', () => {
         const isOpen = item.classList.contains('open');
