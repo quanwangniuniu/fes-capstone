@@ -126,6 +126,8 @@
       background: var(--fl-bg);
       color: var(--fl-text);
       overflow: hidden;
+      /* Override global `.section` spacing to avoid double top gap. */
+      padding-bottom: 0;
       padding-top: 6rem;
       display: flex;
       align-items: stretch;
@@ -191,10 +193,10 @@
       width: 100%;
       max-width: 1240px;
       margin-inline: auto;
-      padding: clamp(2rem, 6vw, 4.5rem) 1.4rem clamp(4rem, 8vh, 7rem);
+      padding: clamp(1rem, 3vw, 2.2rem) 1.4rem clamp(4rem, 8vh, 7rem);
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       min-height: calc(100vh - 6rem);
     }
 
