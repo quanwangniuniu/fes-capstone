@@ -1475,7 +1475,7 @@ ol {
    ============================================ */
 
 .mentors-section {
-  overflow: hidden;
+  overflow: visible;
 }
 
 .mentors__title {
@@ -1487,52 +1487,40 @@ ol {
 
 .mentors-marquee {
   margin-top: var(--spacing-8);
-  overflow: hidden;
-  mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+  overflow: visible;
+  mask-image: none;
+  -webkit-mask-image: none;
 }
 
 .mentors-marquee__track {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: var(--spacing-6);
-  width: max-content;
-  animation: mentors-marquee 40s linear infinite;
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--spacing-4);
+  animation: none;
 }
 
-@keyframes mentors-marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+.mentors-marquee__track .mentor-card[aria-hidden="true"] {
+  display: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .mentors-marquee {
-    overflow: visible;
-    mask-image: none;
-    -webkit-mask-image: none;
-  }
-
+@media (max-width: 640px) {
   .mentors-marquee__track {
-    animation: none;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
-    padding-inline: var(--spacing-4);
-    max-width: var(--container-max);
-    margin-inline: auto;
+    grid-template-columns: 1fr;
   }
 
-  .mentors-marquee__track .mentor-card[aria-hidden="true"] {
-    display: none;
+  .mentor-card {
+    max-width: 320px;
   }
 }
 
 .mentor-card {
-  flex-shrink: 0;
-  width: 220px;
+  width: 100%;
+  max-width: 260px;
+  margin-inline: auto;
   text-align: center;
   padding: var(--spacing-6);
   background: var(--color-bg);
